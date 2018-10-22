@@ -1,0 +1,24 @@
+<template>
+  <h1>Hello World</h1>
+</template>
+
+<script>
+  var file_name = "hello-world";
+
+  class CardTemplate extends HTMLElement{
+    constructor(){
+      super();
+      const shadow = this.attachShadow({mode:'open'});
+      shadow.innerHTML =  document.querySelector('link[href$="/' + file_name + '.html"]')
+                          .import.querySelector("template").innerHTML;
+    }
+  }
+
+  function defineComponent(){
+    customElements.define(file_name, CardTemplate);
+    console.log("Component defined")
+  }
+
+  window.addEventListener && window.addEventListener('load', defineComponent, false);
+  window.attachEvent && window.attachEvent('onload', defineComponent);
+</script>
